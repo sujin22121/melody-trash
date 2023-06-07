@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Background : MonoBehaviour
+{
+    private float moveSpeed = 3f; 
+
+    void Update()
+    {
+        transform.position += Vector3.down * moveSpeed * Time.deltaTime; // Time.deltaTime => 서로 다른 성능을 가진 PC에서도 똑같은 위치만큼 이동 가능하게 만든다.
+        if(transform.position.y < -10) { // 이미지가 -10보다 작아졌을 때 위로 올려줌
+            transform.position += new Vector3(0, 20f, 0); //20f 만큼 위로 올려줌
+        }
+
+    }
+}
