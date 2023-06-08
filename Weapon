@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Weapon : MonoBehaviour
+{
+    [SerializeField] //unity에서 접근 가능하도록 함
+    private float moveSpeed = 10;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += Vector3.up * moveSpeed * Time.deltaTime; //Vector3.up이라고 해서 y값만 바꾸게 함
+    }
+}
