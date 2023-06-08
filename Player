@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    // Start is called before the first frame update
+    [SerializeField] // 게임을 플레이하면서 어떤 값이 적절한지 볼 수 있음
+
+    private float moveSpeed;
+
+    // Update is called once per frame
+    void Update()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal"); // 좌우 움직임
+       // float verticalInput = Input.GetAxisRaw("Vertical"); // 얘 넣으면 상하로 움직임
+        Vector3 moveTo = new Vector3(horizontalInput, 0f, 0f); // 좌우로만 움직이게 하기 위해서 y값 0f, 2D니까 z값 0f
+        transform.position += moveTo * moveSpeed * Time.deltaTime;
+
+    }
+} 
