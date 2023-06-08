@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] // 게임을 플레이하면서 어떤 값이 적절한지 볼 수 있음
 
     private float moveSpeed;
+    
+    [SerializeField]
+    private GameObject Weapon;
 
     // Update is called once per frame
     void Update()
