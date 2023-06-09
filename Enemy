@@ -39,8 +39,11 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) { //isTrigger
         if(other.gameObject.tag == "Weapon") {
             Weapon weapon = other.gameObject.GetComponent<Weapon>();
-            hp -= weapon.damage;
+            hp -= weapon.damage; //weapon이 미사일 맞았을 때 그만큼 데미지를 입음
             if (hp <= 0) {
+                if(gameObject.tag == "Boss") { //boss를 죽였을 때 gameover
+                    GameManager.instance.SetGameOver();
+                }
                 Destroy(gameObject);
                 Instantiate(coin, transform.position, Quaternion.identity);
             }
