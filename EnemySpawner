@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
             
             spawnCount += 1;
             if(spawnCount % 10 == 0) { // 10, 20, 30, ... 
-                enemyIndex += 1;
+                enemyIndex += 1; //enemy 레벨을 한 단계씩 높임
                 moveSpeed += 2; // 스피드 빠르게 
 
 
