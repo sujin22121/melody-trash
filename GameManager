@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,14 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     private TextMeshProUGUI text; 
+
+    [SerializeField]
+    private GameObject gameOverPanel;
     private int coin = 0;
+
+    [HideInInspector] //public으로 선언했지만 이걸 쓰면 unity에서 보여지지 않음
+    public bool isGameOver = false; //아직 게임이 끝나지 않음을 의미
+
 
     void Awake() {
         if (instance == null) {
@@ -22,5 +30,26 @@ public class GameManager : MonoBehaviour
         coin += 1;
         text.SetText(coin.ToString());
 
+        //if(coin % 10 == 0) {
+            //Player player = FindObjectOfType<Player>();
+            //if(player != null) {
+                //player.Upgrade();
+            //}
+        }
+    
+
+    public void SetGameOver() {
+        isGameOver = true;
+
+        EnemySpawner enemySpawner = FindObjectOfType<EnemySpawner>();
+        if(enemySpawner != null) {
+            enemySpawner.StopEnemyRoutine();
+        }
+
+        gameOverPanel.SetActive(true);
+    }
+
+    public void PlayAgain() {
+        SceneManager.LoadScene("SampleScene");
     }
 }
