@@ -6,6 +6,9 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] enemies;  
+
+    [SerializeField]
+    private GameObject boss;
     private float[] arrPosX = {-2.2f, -1.1f, 0f, 1.1f, 2.2f};  //enemy 간격
     
     [SerializeField]
@@ -19,8 +22,12 @@ public class EnemySpawner : MonoBehaviour
     
     void StartEnemyRoutine() {
         StartCoroutine("EnemyRoutine"); 
+    }
+    public void StopEnemyRoutine() {
+        StopCoroutine("EnemyRoutine");
 
     }
+    
     IEnumerator EnemyRoutine() {
         yield return new WaitForSeconds(3f);
 
@@ -35,11 +42,18 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemy(posX, enemyIndex, moveSpeed);
             }
             
-            spawnCount++;
+            spawnCount += 1;
             if(spawnCount % 10 == 0) { // 10, 20, 30, ... 
                 enemyIndex += 1;
                 moveSpeed += 2; // 스피드 빠르게 
 
+
+            }
+
+            if(enemyIndex >= enemies.Length) { // 이때 보스를 등장시킴
+                SpawnBoss();
+                enemyIndex = 0; //boss올 때 쉬운 단계 장애물로 바꿔줌
+                moveSpeed = 5f;
 
             }
 
@@ -64,5 +78,10 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.SetMoveSpeed(moveSpeed);
     }
+    void SpawnBoss() { // boss
+        Instantiate(boss, transform.position, Quaternion.identity); //boss가 위에서 등장함 
+    }
+
 }
 
+    
